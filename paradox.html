@@ -1150,6 +1150,114 @@
   .cell-repeat { padding: 4px 6px !important; }
   .cell-repeat select { min-width: 90px; }
   .task-table tr.task-expired { opacity: .55; }
+
+  /* 任务标签与分组 */
+  .col-tag { width: 148px; }
+  .task-table { min-width: 960px; }
+  .cell-title { position: relative; padding-right: 34px !important; }
+  .task-table .icon-edit {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    border: 0;
+    border-radius: 5px;
+    background: transparent;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .task-table .icon-edit:hover { color: var(--primary-text); background: var(--primary-soft); }
+  .task-title-input {
+    width: 100%;
+    min-height: 30px;
+    padding: 4px 6px;
+    border: 1px solid var(--primary);
+    border-radius: 6px;
+    background: var(--panel);
+    color: var(--text);
+    font: inherit;
+    font-size: 12px;
+  }
+  .task-title-input:focus { outline: 2px solid var(--primary-soft); outline-offset: 0; }
+  .task-table tr.task-group-header td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--line-strong);
+    background: var(--panel-2);
+    color: var(--text-2);
+    font-size: 10.5px;
+    font-weight: 650;
+    letter-spacing: .02em;
+  }
+  .task-table tbody tr.task-group-header:hover td { background: var(--panel-2); }
+  .task-group-title { display: inline-flex; align-items: center; gap: 6px; }
+  .task-group-count { color: var(--muted); font-size: 10px; font-weight: 500; }
+  .cell-tag { padding: 5px 8px !important; }
+  .tag-picker {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    max-width: 100%;
+    min-height: 30px;
+    padding: 4px 9px;
+    border: 1px solid color-mix(in srgb, var(--primary) 24%, transparent);
+    border-radius: 999px;
+    background: var(--primary-soft);
+    color: var(--primary-text);
+    font-size: 10.5px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .tag-picker.is-empty { border-style: dashed; border-color: var(--line); background: var(--panel-3); color: var(--muted); }
+  .tag-picker:hover { border-color: var(--primary); }
+  .tag-picker .task-tag-badge { max-width: 98px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tag-picker .tag-caret { color: currentColor; font-size: 8px; opacity: .65; }
+  .tag-picker select { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+  .tag-picker:focus-within { outline: 2px solid var(--primary); outline-offset: 2px; }
+  .table-toolbar-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-left: auto; }
+  .tag-manage-wrap { position: relative; display: flex; align-items: center; }
+  .tag-manager {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    z-index: 30;
+    width: 264px;
+    max-height: 280px;
+    overflow: auto;
+    padding: 10px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--panel);
+    box-shadow: var(--shadow-pop);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+  }
+  .tag-manager[hidden] { display: none; }
+  .tag-manager-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 2px 2px 8px; color: var(--text); font-size: 12px; font-weight: 650; }
+  .tag-manager-close { width: 26px; height: 26px; border: 0; border-radius: 5px; background: transparent; color: var(--muted); cursor: pointer; }
+  .tag-manager-close:hover { color: var(--danger); background: color-mix(in srgb, var(--danger) 12%, transparent); }
+  .tag-manager-empty { padding: 10px 4px; color: var(--muted); font-size: 11px; line-height: 1.5; }
+  .tag-manager-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 34px; padding: 4px 6px; border-top: 1px solid var(--line); color: var(--text-2); font-size: 11px; }
+  .tag-manager-row:first-child { border-top: 0; }
+  .tag-manager-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tag-manager-count { margin-left: 6px; color: var(--muted); font-size: 9.5px; }
+  .tag-manager-del { flex: 0 0 auto; width: 26px; height: 26px; border: 0; border-radius: 5px; background: transparent; color: var(--muted); cursor: pointer; }
+  .tag-manager-del:hover { color: var(--danger); background: color-mix(in srgb, var(--danger) 12%, transparent); }
+  .repeat-tag-field { display: grid; gap: 6px; margin-top: 12px; }
+  .repeat-tag-field > label { color: var(--muted); font-size: 11px; }
+  .repeat-tag-field select { width: 100%; min-height: 34px; padding: 4px 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel-2); color: var(--text); font-size: 11.5px; }
+  .repeat-tag-new { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px; }
+  .repeat-tag-new[hidden] { display: none; }
+  .repeat-tag-new input { min-height: 34px; padding: 4px 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel-2); color: var(--text); font-size: 11.5px; }
+  .repeat-tag-new .btn { min-height: 34px; padding: 0 10px; font-size: 11px; }
+
   .expired-tag {
     display: inline-block;
     margin-left: 6px;
@@ -1361,6 +1469,7 @@
     margin-top: 16px;
   }
   .repeat-modal-actions .text-btn { margin-left: auto; }
+  .repeat-modal-foot { margin-top: 10px; text-align: center; }
 
   .memo-panel {
     display: flex;
@@ -1914,6 +2023,9 @@
     .memo-panel { min-height: 0; overflow: hidden; height: auto; max-height: 500px; }
     .memo-list { max-height: none; overflow-y: auto; }
     .task-sort select { min-height: 40px; }
+    .tag-manager { width: min(280px, calc(100vw - 56px)); }
+    .tag-manage-wrap .btn { min-height: 40px; }
+    .tag-picker { min-height: 36px; }
 
     .form-row { grid-template-columns: minmax(0, 1fr); }
     .form-row .btn { width: 100%; }
@@ -2138,21 +2250,34 @@
 
             <div class="table-toolbar">
               <span class="table-toolbar-label">任务列表</span>
-              <label class="task-sort">
-                <span>排序</span>
-                <select id="taskSort" aria-label="任务排序">
-                  <option value="prio-desc" selected>优先级：高 → 低</option>
-                  <option value="prio-asc">优先级：低 → 高</option>
-                  <option value="seq-desc">添加顺序：新 → 旧</option>
-                  <option value="seq-asc">添加顺序：旧 → 新</option>
-                </select>
-              </label>
+              <div class="table-toolbar-actions">
+                <label class="task-sort">
+                  <span>排序</span>
+                  <select id="taskSort" aria-label="任务排序">
+                    <option value="prio-desc" selected>优先级：高 → 低</option>
+                    <option value="prio-asc">优先级：低 → 高</option>
+                    <option value="seq-desc">添加顺序：新 → 旧</option>
+                    <option value="seq-asc">添加顺序：旧 → 新</option>
+                  </select>
+                </label>
+                <div class="tag-manage-wrap">
+                  <button type="button" class="btn small" id="manageTagsBtn" aria-haspopup="dialog" aria-expanded="false">管理标签</button>
+                  <div class="tag-manager" id="tagManager" role="dialog" aria-label="标签管理" hidden>
+                    <div class="tag-manager-head">
+                      <span>标签管理</span>
+                      <button type="button" class="tag-manager-close" data-tag-manager-close aria-label="关闭标签管理">✕</button>
+                    </div>
+                    <div class="tag-manager-list" id="tagManagerList"></div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="table-wrap">
               <table class="task-table">
                 <colgroup>
                   <col>
+                  <col class="col-tag">
                   <col class="col-priority">
                   <col class="col-repeat">
                   <col span="7" class="col-day">
@@ -2161,6 +2286,7 @@
                 <thead>
                   <tr>
                     <th scope="col">任务</th>
+                    <th scope="col">标签</th>
                     <th scope="col">优先级</th>
                     <th scope="col">循环</th>
                     <th scope="col" class="day-col">周一</th>
@@ -2336,6 +2462,16 @@
       <div class="repeat-modal-actions">
         <button type="button" class="btn primary" data-repeat-choice="weekly">每周循环</button>
         <button type="button" class="btn" data-repeat-choice="once">单次</button>
+      </div>
+      <div class="repeat-tag-field">
+        <label for="repeatTag">标签</label>
+        <select id="repeatTag" aria-label="选择任务标签"></select>
+        <div class="repeat-tag-new" id="repeatTagNewWrap" hidden>
+          <input type="text" id="repeatTagNew" maxlength="24" placeholder="输入新标签名" autocomplete="off" aria-label="新标签名称">
+          <button type="button" class="btn small" id="repeatTagCreate">添加标签</button>
+        </div>
+      </div>
+      <div class="repeat-modal-foot">
         <button type="button" class="text-btn" data-repeat-cancel>取消</button>
       </div>
     </div>
@@ -2372,6 +2508,9 @@
   var TASK_SORTS = ['prio-desc', 'prio-asc', 'seq-desc', 'seq-asc'];
   var PLAN_VIEWS = ['plan', 'contribution'];
   var REPEAT_MODES = ['weekly', 'once'];
+  var TAG_MAX = 24;
+  var TAG_NEW = '__new__';
+  var tagCollator = null;
 
   var state = null;
   var draftFilters = null;
@@ -2473,6 +2612,29 @@
     return n;
   }
 
+  function normalizeTag(value) {
+    if (typeof value !== 'string') { return ''; }
+    return value.replace(/\s+/g, ' ').trim().slice(0, TAG_MAX);
+  }
+
+  function compareTagNames(a, b) {
+    try {
+      if (!tagCollator) {
+        tagCollator = new Intl.Collator('zh-Hans-CN', { numeric: true, sensitivity: 'base' });
+      }
+      return tagCollator.compare(a, b);
+    } catch (e) {
+      return String(a).localeCompare(String(b));
+    }
+  }
+
+  function ensureTag(value) {
+    var tag = normalizeTag(value);
+    if (!tag || !state || !Array.isArray(state.tags)) { return tag; }
+    if (state.tags.indexOf(tag) === -1) { state.tags.push(tag); }
+    return tag;
+  }
+
   function normDays(value) {
     var out = [];
     if (!Array.isArray(value)) { return out; }
@@ -2528,6 +2690,7 @@
       flags: [],
       memos: [],
       contributions: {},
+      tags: [],
       lastCheckedDate: '',
       lastResetWeek: '',
       planView: 'plan',
@@ -2596,6 +2759,7 @@
           id: takeId(t.id),
           title: t.title.trim().slice(0, 80),
           priority: clampInt(t.priority, 1, 4, 2),
+          tag: normalizeTag(t.tag),
           days: days.length ? days : [weekdayIndex()],
           doneDays: normDays(t.doneDays).filter(function (d) { return days.indexOf(d) !== -1; }),
           seq: clampInt(t.seq, 0, Number.MAX_SAFE_INTEGER, 0),
@@ -2604,6 +2768,17 @@
         };
       });
     }
+
+    next.tags = [];
+    if (Array.isArray(raw.tags)) {
+      raw.tags.forEach(function (tag) {
+        var name = normalizeTag(tag);
+        if (name && next.tags.indexOf(name) === -1) { next.tags.push(name); }
+      });
+    }
+    next.tasks.forEach(function (task) {
+      if (task.tag && next.tags.indexOf(task.tag) === -1) { next.tags.push(task.tag); }
+    });
 
     if (Array.isArray(raw.flags)) {
       next.flags = raw.flags.filter(function (f) {
@@ -3118,17 +3293,47 @@
     });
   }
 
+  function tagOptionsHtml(selected) {
+    var options = '<option value="">无标签</option>';
+    (Array.isArray(state.tags) ? state.tags : []).forEach(function (tag) {
+      options += '<option value="' + esc(tag) + '"' + (tag === selected ? ' selected' : '') + '>' + esc(tag) + '</option>';
+    });
+    if (selected && state.tags.indexOf(selected) === -1) {
+      options += '<option value="' + esc(selected) + '" selected>' + esc(selected) + '</option>';
+    }
+    options += '<option value="' + TAG_NEW + '">+ 创建新标签…</option>';
+    return options;
+  }
+
+  function groupTasksForTable(tasks) {
+    var grouped = Object.create(null);
+    var untagged = [];
+    tasks.forEach(function (task) {
+      var tag = normalizeTag(task.tag);
+      if (!tag) { untagged.push(task); return; }
+      if (!grouped[tag]) { grouped[tag] = []; }
+      grouped[tag].push(task);
+    });
+    var groups = Object.keys(grouped).sort(compareTagNames).map(function (tag) {
+      return { tag: tag, tasks: sortTasksForTable(grouped[tag]) };
+    });
+    if (untagged.length) {
+      groups.push({ tag: '', tasks: sortTasksForTable(untagged) });
+    }
+    return groups;
+  }
+
   function renderTaskTable() {
     var tbody = $('#taskTbody');
     if (!tbody) { return; }
     var wrap = $('.table-wrap');
     var scrollTop = wrap ? wrap.scrollTop : 0;
     var scrollLeft = wrap ? wrap.scrollLeft : 0;
-    var rows = sortTasksForTable(state.tasks.slice());
+    var groups = groupTasksForTable(state.tasks.slice());
     var week = currentISOWeek();
 
-    if (!rows.length) {
-      tbody.innerHTML = '<tr><td colspan="11" class="table-empty">还没有任务，先在上方添加一条。</td></tr>';
+    if (!groups.length) {
+      tbody.innerHTML = '<tr><td colspan="12" class="table-empty">还没有任务，先在上方添加一条。</td></tr>';
       if (wrap) {
         wrap.scrollTop = 0;
         wrap.scrollLeft = 0;
@@ -3136,40 +3341,217 @@
       return;
     }
 
-    tbody.innerHTML = rows.map(function (t) {
-      var options = [4, 3, 2, 1].map(function (p) {
-        return '<option value="' + p + '"' + (Number(t.priority) === p ? ' selected' : '') + '>' + PRIORITIES[p] + '</option>';
-      }).join('');
+    var rows = [];
+    groups.forEach(function (group) {
+      rows.push('<tr class="task-group-header"><td colspan="12">' +
+        '<span class="task-group-title">🏷️ 标签：' + esc(group.tag || '无标签') + '</span>' +
+        '<span class="task-group-count">' + group.tasks.length + ' 项</span></td></tr>');
+      group.tasks.forEach(function (t) {
+        var options = [4, 3, 2, 1].map(function (p) {
+          return '<option value="' + p + '"' + (Number(t.priority) === p ? ' selected' : '') + '>' + PRIORITIES[p] + '</option>';
+        }).join('');
 
-      var repeat = t.repeat === 'once' ? 'once' : 'weekly';
-      var expired = repeat === 'once' && t.onceWeek !== week;
-      var repeatOptions = '<option value="weekly"' + (repeat === 'weekly' ? ' selected' : '') + '>每周循环</option>' +
-        '<option value="once"' + (repeat === 'once' ? ' selected' : '') + '>单次</option>';
+        var repeat = t.repeat === 'once' ? 'once' : 'weekly';
+        var expired = repeat === 'once' && t.onceWeek !== week;
+        var repeatOptions = '<option value="weekly"' + (repeat === 'weekly' ? ' selected' : '') + '>每周循环</option>' +
+          '<option value="once"' + (repeat === 'once' ? ' selected' : '') + '>单次</option>';
+        var tag = normalizeTag(t.tag);
 
-      var dayCells = WEEKDAYS.map(function (name, index) {
-        var day = index + 1;
-        var checked = t.days.indexOf(day) !== -1;
-        return '<td class="day-cell"><label class="cell-check">' +
-          '<input type="checkbox" data-task-id="' + esc(t.id) + '" data-day="' + day + '"' +
-          (checked ? ' checked' : '') + ' aria-label="' + esc(t.title) + ' 安排在' + name + '">' +
-        '</label></td>';
-      }).join('');
+        var dayCells = WEEKDAYS.map(function (name, index) {
+          var day = index + 1;
+          var checked = t.days.indexOf(day) !== -1;
+          return '<td class="day-cell"><label class="cell-check">' +
+            '<input type="checkbox" data-task-id="' + esc(t.id) + '" data-day="' + day + '"' +
+            (checked ? ' checked' : '') + ' aria-label="' + esc(t.title) + ' 安排在' + name + '">' +
+          '</label></td>';
+        }).join('');
 
-      return '<tr' + (expired ? ' class="task-expired"' : '') + '><td class="cell-title">' +
-        '<span class="task-title-text">' + esc(t.title) + '</span>' +
-        (expired ? '<span class="expired-tag">已过期</span>' : '') + '</td>' +
-        '<td><select data-task-id="' + esc(t.id) + '" aria-label="修改优先级：' + esc(t.title) + '">' + options + '</select></td>' +
-        '<td class="cell-repeat"><select data-repeat-task="' + esc(t.id) + '" aria-label="修改循环方式：' + esc(t.title) + '">' +
-          repeatOptions + '</select></td>' +
-        dayCells +
-        '<td><button type="button" class="icon-del" data-del="' + esc(t.id) + '" title="删除任务：' + esc(t.title) +
-          '" aria-label="删除任务：' + esc(t.title) + '">✕</button></td></tr>';
-    }).join('');
+        rows.push('<tr' + (expired ? ' class="task-expired"' : '') + '>' +
+          '<td class="cell-title"><span class="task-title-text">' + esc(t.title) + '</span>' +
+            (expired ? '<span class="expired-tag">已过期</span>' : '') +
+            '<button type="button" class="icon-edit" data-edit-title="' + esc(t.id) + '" title="编辑任务名：' + esc(t.title) +
+              '" aria-label="编辑任务名：' + esc(t.title) + '">✏️</button></td>' +
+          '<td class="cell-tag"><label class="tag-picker' + (tag ? '' : ' is-empty') + '">' +
+            '<span class="task-tag-badge" title="' + esc(tag || '无标签') + '">' + esc(tag || '无标签') + '</span>' +
+            '<span class="tag-caret" aria-hidden="true">▾</span>' +
+            '<select data-tag-task="' + esc(t.id) + '" aria-label="修改标签：' + esc(t.title) + '">' + tagOptionsHtml(tag) + '</select>' +
+          '</label></td>' +
+          '<td><select data-task-id="' + esc(t.id) + '" aria-label="修改优先级：' + esc(t.title) + '">' + options + '</select></td>' +
+          '<td class="cell-repeat"><select data-repeat-task="' + esc(t.id) + '" aria-label="修改循环方式：' + esc(t.title) + '">' +
+            repeatOptions + '</select></td>' +
+          dayCells +
+          '<td><button type="button" class="icon-del" data-del="' + esc(t.id) + '" title="删除任务：' + esc(t.title) +
+            '" aria-label="删除任务：' + esc(t.title) + '">✕</button></td></tr>');
+      });
+    });
+    tbody.innerHTML = rows.join('');
 
     if (wrap) {
       wrap.scrollTop = scrollTop;
       wrap.scrollLeft = scrollLeft;
     }
+  }
+
+  function beginTaskTitleEdit(id) {
+    var task = findTask(id);
+    if (!task) { return; }
+    var button = document.querySelector('button[data-edit-title="' + id + '"]');
+    var cell = button ? button.closest('td') : null;
+    if (!cell || cell.querySelector('.task-title-input')) { return; }
+    var input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'task-title-input';
+    input.maxLength = 80;
+    input.value = task.title;
+    input.setAttribute('aria-label', '编辑任务名');
+
+    var settled = false;
+    function finish(save) {
+      if (settled) { return; }
+      settled = true;
+      if (save) {
+        var nextTitle = input.value.replace(/\s+/g, ' ').trim().slice(0, 80);
+        if (!nextTitle) {
+          toast('任务名不能为空');
+          renderTaskTable();
+          return;
+        }
+        if (nextTitle !== task.title) {
+          task.title = nextTitle;
+          persist();
+          toast('任务名已更新');
+        }
+      }
+      renderTaskTable();
+    }
+
+    input.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        finish(true);
+      } else if (event.key === 'Escape') {
+        event.preventDefault();
+        finish(false);
+      }
+    });
+    input.addEventListener('blur', function () { finish(true); });
+
+    cell.textContent = '';
+    cell.appendChild(input);
+    input.focus();
+    input.select();
+  }
+
+  function renderTagManager() {
+    var list = $('#tagManagerList');
+    if (!list) { return; }
+    var tags = Array.isArray(state.tags) ? state.tags : [];
+    if (!tags.length) {
+      list.innerHTML = '<div class="tag-manager-empty">暂无标签。新建任务时可创建新标签。</div>';
+      return;
+    }
+    list.innerHTML = tags.map(function (tag) {
+      var count = state.tasks.filter(function (t) { return normalizeTag(t.tag) === tag; }).length;
+      return '<div class="tag-manager-row">' +
+        '<span class="tag-manager-name" title="' + esc(tag) + '">' + esc(tag) +
+          '<span class="tag-manager-count">' + count + ' 项</span></span>' +
+        '<button type="button" class="tag-manager-del" data-tag-delete="' + esc(tag) + '" title="删除标签：' + esc(tag) +
+          '" aria-label="删除标签：' + esc(tag) + '">✕</button></div>';
+    }).join('');
+  }
+
+  function renderRepeatTagOptions(selected) {
+    var select = $('#repeatTag');
+    if (!select) { return; }
+    var options = '<option value="">【无标签】</option>';
+    (Array.isArray(state.tags) ? state.tags : []).forEach(function (tag) {
+      options += '<option value="' + esc(tag) + '">' + esc(tag) + '</option>';
+    });
+    options += '<option value="' + TAG_NEW + '">+ 创建新标签…</option>';
+    select.innerHTML = options;
+    select.value = selected || '';
+    var wrap = $('#repeatTagNewWrap');
+    if (wrap) { wrap.hidden = true; }
+    var input = $('#repeatTagNew');
+    if (input) { input.value = ''; }
+  }
+
+  function setRepeatTagNewVisible(visible) {
+    var wrap = $('#repeatTagNewWrap');
+    if (!wrap) { return; }
+    wrap.hidden = !visible;
+    if (visible) {
+      var input = $('#repeatTagNew');
+      if (input) { window.setTimeout(function () { input.focus(); }, 0); }
+    }
+  }
+
+  function addRepeatTagFromInput() {
+    var input = $('#repeatTagNew');
+    var tag = normalizeTag(input ? input.value : '');
+    if (!tag) {
+      toast('请输入标签名');
+      if (input) { input.focus(); }
+      return '';
+    }
+    ensureTag(tag);
+    persist();
+    renderRepeatTagOptions(tag);
+    renderTagManager();
+    if (pendingTaskDraft) { pendingTaskDraft.tag = tag; }
+    toast('标签已创建');
+    return tag;
+  }
+
+  function prepareTaskTag() {
+    if (!pendingTaskDraft) { return false; }
+    var select = $('#repeatTag');
+    if (!select) { return true; }
+    if (select.value === TAG_NEW) {
+      return !!addRepeatTagFromInput();
+    }
+    var tag = normalizeTag(select.value);
+    if (tag) { ensureTag(tag); }
+    pendingTaskDraft.tag = tag;
+    return true;
+  }
+
+  function closeTagManager() {
+    var panel = $('#tagManager');
+    var button = $('#manageTagsBtn');
+    if (panel) { panel.hidden = true; }
+    if (button) { button.setAttribute('aria-expanded', 'false'); }
+  }
+
+  function toggleTagManager() {
+    var panel = $('#tagManager');
+    var button = $('#manageTagsBtn');
+    if (!panel || !button) { return; }
+    if (!panel.hidden) {
+      closeTagManager();
+      return;
+    }
+    renderTagManager();
+    panel.hidden = false;
+    button.setAttribute('aria-expanded', 'true');
+  }
+
+  function deleteTag(value) {
+    var tag = normalizeTag(value);
+    if (!tag) { return; }
+    var count = state.tasks.filter(function (t) { return normalizeTag(t.tag) === tag; }).length;
+    var prompt = '删除标签「' + tag + '」？';
+    if (count) { prompt += '\n' + count + ' 个任务会自动回到「无标签」。'; }
+    if (!window.confirm(prompt)) { return; }
+    state.tags = state.tags.filter(function (name) { return name !== tag; });
+    state.tasks.forEach(function (task) {
+      if (normalizeTag(task.tag) === tag) { task.tag = ''; }
+    });
+    persist();
+    renderTaskTable();
+    renderTagManager();
+    renderDayPanel();
+    toast('标签已删除');
   }
 
   function renderTaskDayPicker() {
@@ -3232,6 +3614,7 @@
     pendingTaskDraft = draft;
     label.textContent = '「' + draft.title + '」';
     repeatModalLastFocus = document.activeElement;
+    renderRepeatTagOptions('');
     modal.hidden = false;
     var first = modal.querySelector('[data-repeat-choice="weekly"]');
     if (first) { window.setTimeout(function () { first.focus(); }, 0); }
@@ -3264,10 +3647,12 @@
     if (!pendingTaskDraft) { return; }
     var repeat = mode === 'once' ? 'once' : 'weekly';
     var draft = pendingTaskDraft;
+    var tag = ensureTag(draft.tag);
     state.tasks.push({
       id: uid(),
       title: draft.title,
       priority: draft.priority,
+      tag: tag,
       days: draft.days,
       doneDays: [],
       seq: ++state.seq,
@@ -3278,6 +3663,7 @@
     clearTaskForm();
     closeRepeatModal(true);
     renderPlanView();
+    renderTagManager();
     toast(repeat === 'once' ? '任务已添加（单次）' : '任务已添加（每周循环）');
   }
 
@@ -3928,8 +4314,39 @@
       repeatModal.addEventListener('click', function (event) {
         if (event.target === repeatModal) { closeRepeatModal(true); return; }
         var choice = event.target.closest('[data-repeat-choice]');
-        if (choice) { createTaskFromDraft(choice.getAttribute('data-repeat-choice')); return; }
+        if (choice) {
+          if (!prepareTaskTag()) { return; }
+          createTaskFromDraft(choice.getAttribute('data-repeat-choice'));
+          return;
+        }
         if (event.target.closest('[data-repeat-cancel]')) { closeRepeatModal(true); }
+      });
+    }
+
+    var repeatTag = $('#repeatTag');
+    if (repeatTag) {
+      repeatTag.addEventListener('change', function () {
+        if (repeatTag.value === TAG_NEW) {
+          setRepeatTagNewVisible(true);
+          return;
+        }
+        setRepeatTagNewVisible(false);
+        if (pendingTaskDraft) { pendingTaskDraft.tag = normalizeTag(repeatTag.value); }
+      });
+    }
+
+    var repeatTagCreate = $('#repeatTagCreate');
+    if (repeatTagCreate) {
+      repeatTagCreate.addEventListener('click', function () { addRepeatTagFromInput(); });
+    }
+
+    var repeatTagNew = $('#repeatTagNew');
+    if (repeatTagNew) {
+      repeatTagNew.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          addRepeatTagFromInput();
+        }
       });
     }
 
@@ -4002,6 +4419,27 @@
       });
     }
 
+    var manageTagsBtn = $('#manageTagsBtn');
+    if (manageTagsBtn) {
+      manageTagsBtn.addEventListener('click', function () { toggleTagManager(); });
+    }
+
+    var tagManager = $('#tagManager');
+    if (tagManager) {
+      tagManager.addEventListener('click', function (event) {
+        if (event.target.closest('[data-tag-manager-close]')) {
+          closeTagManager();
+          if (manageTagsBtn) { manageTagsBtn.focus(); }
+          return;
+        }
+        var del = event.target.closest('[data-tag-delete]');
+        if (del) {
+          event.stopPropagation();
+          deleteTag(del.getAttribute('data-tag-delete'));
+        }
+      });
+    }
+
     var tbody = $('#taskTbody');
     if (tbody) {
       tbody.addEventListener('change', function (event) {
@@ -4022,6 +4460,28 @@
           renderContribution();
           var refocusedRepeat = document.querySelector('select[data-repeat-task="' + repeatTaskId + '"]');
           if (refocusedRepeat) { refocusedRepeat.focus(); }
+          return;
+        }
+
+        var tagSelect = event.target.closest('select[data-tag-task]');
+        if (tagSelect) {
+          var tagTask = findTask(tagSelect.getAttribute('data-tag-task'));
+          if (!tagTask) { return; }
+          var nextTag;
+          if (tagSelect.value === TAG_NEW) {
+            var enteredTag = window.prompt('输入新标签名（最多 24 字）', '');
+            nextTag = normalizeTag(enteredTag || '');
+            if (!nextTag) { renderTaskTable(); return; }
+          } else {
+            nextTag = normalizeTag(tagSelect.value);
+          }
+          tagTask.tag = nextTag;
+          if (nextTag) { ensureTag(nextTag); }
+          persist();
+          renderTaskTable();
+          renderTagManager();
+          var refocusedTag = document.querySelector('select[data-tag-task="' + tagTask.id + '"]');
+          if (refocusedTag) { refocusedTag.focus(); }
           return;
         }
 
@@ -4058,12 +4518,18 @@
       });
 
       tbody.addEventListener('click', function (event) {
+        var edit = event.target.closest('button[data-edit-title]');
+        if (edit) {
+          beginTaskTitleEdit(edit.getAttribute('data-edit-title'));
+          return;
+        }
         var del = event.target.closest('button[data-del]');
         if (!del) { return; }
         var id = del.getAttribute('data-del');
         state.tasks = state.tasks.filter(function (t) { return t.id !== id; });
         persist();
         renderTaskTable();
+        renderTagManager();
         renderDayPanel();
         toast('任务已删除');
       });
@@ -4344,6 +4810,7 @@
     }
 
     document.addEventListener('click', function (event) {
+      if (!event.target.closest('.tag-manage-wrap')) { closeTagManager(); }
       var pop = $('#filterPopover');
       if (!pop || pop.hidden) { return; }
       if (event.target.closest('.filter-wrap')) { return; }
@@ -4356,6 +4823,13 @@
       var modal = $('#repeatModal');
       if (modal && !modal.hidden) {
         closeRepeatModal(true);
+        return;
+      }
+      var tagManager = $('#tagManager');
+      if (tagManager && !tagManager.hidden) {
+        closeTagManager();
+        var manageBtn = $('#manageTagsBtn');
+        if (manageBtn) { manageBtn.focus(); }
         return;
       }
       var pop = $('#filterPopover');
@@ -4389,6 +4863,7 @@
     if (taskSortSelect) { taskSortSelect.value = state.taskSort; }
     resetTaskDays();
     renderPlanView();
+    renderTagManager();
 
     renderTimeline();
 
