@@ -726,6 +726,61 @@
     gap: 12px;
   }
 
+  .core-plan-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 0 0 auto;
+    min-width: 0;
+    padding: 16px 18px;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--primary);
+    border-radius: var(--r);
+    background: linear-gradient(90deg, var(--primary-soft) 0%, var(--panel) 20%);
+    box-shadow: var(--shadow-sm);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  }
+  .core-plan-card:focus-within {
+    border-color: color-mix(in srgb, var(--primary) 45%, var(--line));
+    border-left-color: var(--primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 10%, transparent);
+  }
+  .core-plan-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 650;
+  }
+  .core-plan-icon { font-size: 16px; line-height: 1; }
+  .core-plan-textarea {
+    display: block;
+    width: 100%;
+    min-height: 23px;
+    max-height: 120px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.55;
+    resize: none;
+    outline: none;
+    overflow-y: auto;
+  }
+  .core-plan-textarea::placeholder { color: var(--muted); opacity: 1; }
+
+  @media (max-width: 760px) {
+    .core-plan-card { padding: 14px 15px; }
+    .core-plan-textarea { font-size: 14px; }
+  }
+
   .dim-card {
     --dc: var(--dim);
     --dc-soft: var(--dim-soft);
@@ -2120,6 +2175,88 @@
       transition-duration: 0.01ms !important;
     }
   }
+  /* Floating quick navigation (TOC) */
+  #floating-toc {
+    position: fixed;
+    top: 120px;
+    right: 24px;
+    z-index: 2147483640;
+    box-sizing: border-box;
+    width: 30px;
+    padding: 8px 0;
+    overflow: hidden;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    background: transparent;
+    box-shadow: none;
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    transition: all .3s ease;
+  }
+  #floating-toc:hover {
+    width: 140px;
+    background: var(--panel);
+    border-color: var(--line);
+    box-shadow: var(--shadow);
+  }
+  .toc-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .toc-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 22px;
+    padding: 0 7px;
+    border-radius: 6px;
+    color: var(--text);
+    text-decoration: none;
+    outline: none;
+  }
+  .toc-bar {
+    flex: 0 0 16px;
+    width: 16px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--line);
+    transition: width .3s ease, height .3s ease, background-color .3s ease;
+  }
+  .toc-label {
+    position: absolute;
+    left: 31px;
+    top: 50%;
+    transform: translateY(-50%) translateX(-4px);
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    font-size: 11.5px;
+    line-height: 1.4;
+    color: var(--muted);
+    transition: opacity .2s ease, transform .3s ease, color .2s ease;
+  }
+  #floating-toc:hover .toc-label {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+  .toc-item:hover .toc-bar,
+  .toc-item:focus-visible .toc-bar {
+    width: 24px;
+    flex-basis: 24px;
+    background: var(--primary);
+  }
+  .toc-item:hover .toc-label,
+  .toc-item:focus-visible .toc-label { color: var(--text); }
+  .toc-item.active .toc-bar {
+    height: 3px;
+    background: var(--primary);
+  }
+  .toc-item.active .toc-label { color: var(--text); }
+  #block-a, #block-b, #block-c { scroll-margin-top: 84px; }
+  @media (max-width: 759.98px), (max-height: 560px) {
+    #floating-toc { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -2161,7 +2298,7 @@
     <div id="storageNotice" class="notice" role="status" hidden></div>
 
     <!-- 区块 A -->
-    <section class="block-a" aria-labelledby="dimsTitle">
+    <section id="block-a" class="block-a" aria-labelledby="dimsTitle">
       <div class="dims-col">
         <div class="block-head">
           <div>
@@ -2169,6 +2306,14 @@
             <h2 id="dimsTitle">六维矛盾</h2>
           </div>
           <p class="hint">记录当下最核心的矛盾，紧迫度即时映射到雷达。</p>
+        </div>
+
+        <div class="core-plan-card">
+          <div class="core-plan-header">
+            <span class="core-plan-icon" aria-hidden="true">🎯</span>
+            <span>近期核心计划</span>
+          </div>
+          <textarea id="corePlanInput" class="core-plan-textarea" rows="1" maxlength="4000" aria-label="近期核心计划" placeholder="定位最近的中心：比如完成个人发展展板的开发与开源…"></textarea>
         </div>
 
         <div class="dims-grid" id="dimsGrid"></div>
@@ -2207,7 +2352,7 @@
     </section>
 
     <!-- 区块 B -->
-    <section class="block-b" aria-label="周计划与备忘">
+    <section id="block-b" class="block-b" aria-label="周计划与备忘">
       <section class="panel plan-panel" aria-labelledby="planTitle">
         <div class="panel-head">
           <div>
@@ -2361,7 +2506,7 @@
     </section>
 
     <!-- 区块 C -->
-    <section class="panel block-c" aria-labelledby="timelineTitle">
+    <section id="block-c" class="panel block-c" aria-labelledby="timelineTitle">
       <div class="panel-head">
         <div>
           <p class="kicker">04 / 归档</p>
@@ -2457,6 +2602,20 @@
       </div>
     </section>
   </main>
+
+  <nav id="floating-toc" class="toc-collapsed" aria-label="页面快速导航">
+    <div class="toc-inner">
+      <a href="#block-a" class="toc-item" data-target="block-a">
+        <span class="toc-bar"></span><span class="toc-label">核心计划 / 雷达</span>
+      </a>
+      <a href="#block-b" class="toc-item" data-target="block-b">
+        <span class="toc-bar"></span><span class="toc-label">周计划 / 备忘</span>
+      </a>
+      <a href="#block-c" class="toc-item" data-target="block-c">
+        <span class="toc-bar"></span><span class="toc-label">归档时间轴</span>
+      </a>
+    </div>
+  </nav>
 
   <footer class="footer">
     <span>Atis Paradox｜导向 · 数据保存在本机 localStorage · 无外部请求</span>
@@ -2702,6 +2861,7 @@
       memos: [],
       contributions: {},
       tags: [],
+      corePlan: '',
       lastCheckedDate: '',
       lastResetWeek: '',
       planView: 'plan',
@@ -2843,6 +3003,7 @@
     }
     next.lastCheckedDate = isValidDateStr(raw.lastCheckedDate) ? raw.lastCheckedDate : '';
     next.lastResetWeek = validISOWeek(raw.lastResetWeek) ? raw.lastResetWeek : '';
+    next.corePlan = typeof raw.corePlan === 'string' ? raw.corePlan.slice(0, 4000) : '';
     next.planView = PLAN_VIEWS.indexOf(raw.planView) !== -1 ? raw.planView : 'plan';
 
     var maxSeq = clampInt(raw.seq, 0, Number.MAX_SAFE_INTEGER, 0);
@@ -4231,6 +4392,27 @@
     bindDimBox($('#dimsGrid'));
     bindDimBox($('#primarySlot'));
 
+    var corePlanInput = $('#corePlanInput');
+    if (corePlanInput) {
+      var fitCorePlan = function () {
+        corePlanInput.style.height = 'auto';
+        var maxHeight = 120;
+        var nextHeight = Math.min(corePlanInput.scrollHeight, maxHeight);
+        corePlanInput.style.height = nextHeight + 'px';
+        corePlanInput.style.overflowY = corePlanInput.scrollHeight > maxHeight ? 'auto' : 'hidden';
+      };
+      corePlanInput.value = state.corePlan || '';
+      fitCorePlan();
+      if (window.requestAnimationFrame) { window.requestAnimationFrame(fitCorePlan); }
+      else { window.setTimeout(fitCorePlan, 0); }
+      corePlanInput.addEventListener('input', function () {
+        state.corePlan = corePlanInput.value;
+        persist();
+        fitCorePlan();
+      });
+      window.addEventListener('resize', fitCorePlan, { passive: true });
+    }
+
     var saveSnapshotBtn = $('#saveSnapshotBtn');
     if (saveSnapshotBtn) { saveSnapshotBtn.addEventListener('click', function () { saveSnapshot($('#snapshotKeyword')); }); }
 
@@ -5537,6 +5719,87 @@ console.log("%cCopyright (c) 2026 陈致远 (足下). All Rights Reserved.", "co
   if(reduce&&reduce.addEventListener){reduce.addEventListener('change',sync);}
   if(window.MutationObserver){new MutationObserver(refreshColors).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});}
   refreshColors();sync();
+})();
+</script>
+<script id="floating-toc-script">
+(function () {
+  'use strict';
+  var toc = document.getElementById('floating-toc');
+  if (!toc) return;
+  var items = Array.prototype.slice.call(toc.querySelectorAll('.toc-item'));
+  var targets = items.map(function (item) {
+    return document.getElementById(item.getAttribute('data-target'));
+  }).filter(Boolean);
+  var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+
+  function setActive(id) {
+    items.forEach(function (item) {
+      var active = item.getAttribute('data-target') === id;
+      item.classList.toggle('active', active);
+      if (active) {
+        item.setAttribute('aria-current', 'location');
+      } else {
+        item.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  items.forEach(function (item) {
+    item.addEventListener('click', function (event) {
+      var target = document.getElementById(item.getAttribute('data-target'));
+      if (!target) return;
+      event.preventDefault();
+      setActive(target.id);
+      target.scrollIntoView({
+        behavior: reduce && reduce.matches ? 'auto' : 'smooth',
+        block: 'start'
+      });
+    });
+  });
+
+  if ('IntersectionObserver' in window) {
+    var ratios = {};
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        ratios[entry.target.id] = entry.intersectionRatio;
+      });
+      var best = null;
+      targets.forEach(function (target) {
+        var ratio = ratios[target.id] || 0;
+        if (ratio >= 0.3 && (!best || ratio > best.ratio)) {
+          best = { id: target.id, ratio: ratio };
+        }
+      });
+      if (best) setActive(best.id);
+    }, { threshold: [0.3] });
+    targets.forEach(function (target) { observer.observe(target); });
+  }
+
+  var scrollFrame = 0;
+  function refreshActiveFromScroll() {
+    var bestId = null;
+    var bestRatio = -1;
+    targets.forEach(function (target) {
+      var rect = target.getBoundingClientRect();
+      var visible = Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
+      var ratio = visible / Math.max(rect.height, 1);
+      if (ratio >= 0.3 && ratio > bestRatio) {
+        bestRatio = ratio;
+        bestId = target.id;
+      }
+    });
+    if (bestId) setActive(bestId);
+  }
+  function onTocScroll() {
+    if (scrollFrame) return;
+    scrollFrame = window.requestAnimationFrame(function () {
+      scrollFrame = 0;
+      refreshActiveFromScroll();
+    });
+  }
+  window.addEventListener('scroll', onTocScroll, { passive: true });
+  window.addEventListener('resize', onTocScroll, { passive: true });
+  refreshActiveFromScroll();
 })();
 </script>
 <div id="author-signature" style="display: none;" data-author="陈致远" data-alias="足下" data-year="2026"></div>
